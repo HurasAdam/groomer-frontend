@@ -5,6 +5,8 @@ import { useAccountStore } from "../Store/store";
 
 const Navbar: React.FC = () => {
   const user = useAccountStore((state) => state.account);
+  console.log("user");
+  console.log(user)
   const [isActive,setIsActive]=useState<boolean>(false);
 
 const isNavbarActive = ()=>{

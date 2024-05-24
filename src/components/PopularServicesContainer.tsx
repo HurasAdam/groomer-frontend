@@ -23,9 +23,10 @@ const PopularServicesContainer: React.FC = () => {
       
       
       <div className="  flex justify-between  border-slate-900 flex-wrap gap-6">
-      {CONSTANTS.POPULAR_SERVICES.map((service)=>{
+      {CONSTANTS.POPULAR_SERVICES.map((service,index)=>{
         return(
       <ServiceCard 
+      key={index}
       service={service}
       className="w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
       />

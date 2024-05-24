@@ -16,7 +16,9 @@ const LoginPage: React.FC = () => {
       return login({ formData });
     },
     onSuccess: (data) => {
+      localStorage.setItem("user",JSON.stringify(data));
       setUserAccount(data);
+
     },
   });
 

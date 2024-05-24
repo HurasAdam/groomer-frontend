@@ -8,9 +8,10 @@ const ExclusiveCombossContainer:React.FC = () => {
   return (
     <div className='bg-blue-100 py-14'>
     <div className='px-8 max-w-[1400px] mx-auto sm:px-16 md:px-0 flex flex-wrap justify-center gap-8 pt-5 pb-16 '>
-    {CONSTANTS.SERVLICESLIST.map(({label,description,features,isNew})=>{
+    {CONSTANTS.SERVLICESLIST.map(({label,description,features,isNew},index)=>{
         return(
 <OptionCard 
+key={index}
 label={label} 
 description={description} 
 features={features}

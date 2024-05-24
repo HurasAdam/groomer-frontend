@@ -11,9 +11,10 @@ const OurCommitmentContainer: React.FC = () => {
           You need it, we've got it
         </h2>
         <div className="flex gap-5 w-full py-6 flex-wrap md:px-10 lg:px-4">
-          {OurCommitmentList.map((service) => {
+          {OurCommitmentList.map((service,index) => {
             return (
               <OurCommitmentCard
+              key={index}
                 service={service}
                 className="w-full md:w-[calc(50%-20px)]  lg:w-[calc(25.33%-21px)] xl:w-[calc(25.33%-21px)]   "
               />

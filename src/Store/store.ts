@@ -7,14 +7,22 @@ type IAccountStore = {
     setIsLoggedIn: (data: boolean) => void
 };
 
+
+
 type IUser = {
-    login: string;
-    id: string;
+    email: string;
+    _id: string;
+    token:string;
+    username:string;
 }
 
+const checkUserPersist = localStorage.getItem("user")
+
 export const useAccountStore = create<IAccountStore>((set) => ({
-    isLoggedIn: false,
-    account: undefined,
+
+  
+    isLoggedIn: checkUserPersist?true: false,
+    account: checkUserPersist?JSON.parse(checkUserPersist): undefined,
     setAccount: (user): void => set({ account: user }),
     setIsLoggedIn: (bol): void => set({ isLoggedIn: bol }),
 }))

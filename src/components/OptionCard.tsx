@@ -31,9 +31,9 @@ const OptionCard:React.FC<IProps> = ({label, description, className,features,isN
 <div className='border-t border-slate-300 pt-4 px-1 mb-2.5'>
 <span className='block py-4'>Popular Features</span>
     <ul className='text-sm font-semibold flex flex-col gap-2.5'>
-      {features.map((feature)=>{
+      {features.map((feature,index)=>{
         return(
-          <li className='flex items-center gap-x-3'><FaCircleCheck className='w-5 h-auto text-blue-400'/>{feature}</li>
+          <li key={index} className='flex items-center gap-x-3'><FaCircleCheck className='w-5 h-auto text-blue-400'/>{feature}</li>
         )
       })}
      
