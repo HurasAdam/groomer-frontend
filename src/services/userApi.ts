@@ -17,3 +17,12 @@ export const login = async ({ formData }) => {
   );
   return data;
 };
+
+export const getAllServices = async()=>{
+  try{
+const {data}= await axios.get("http://localhost:3000/api/services/")
+return data;
+  }catch(error){
+    console.log(`Error:${error}`)
+  }
+}

@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import RootLayout from "./Layout/RootLayout";
 import Home from "./pages/Home";
@@ -9,6 +8,7 @@ import OurStoryPage from "./pages/OurStoryPage";
 import ContactPage from "./pages/ContactPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import MyReservations from "./pages/MyReservations";
 
 const App = () => {
   return (
@@ -22,6 +22,7 @@ const App = () => {
             <Route path="/our-story" element={<OurStoryPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/my-reservations" element={<MyReservations/>} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/404" element={<ErrorPage />} />
           </Route>

@@ -8,6 +8,14 @@ const Navbar: React.FC = () => {
   console.log("user");
   console.log(user)
   const [isActive,setIsActive]=useState<boolean>(false);
+  const [profileDropdown,setProfileDropdown]=useState<boolean>(false);
+
+console.log("profileDropdown")
+console.log(profileDropdown)
+  const toggleDropdownHandler = (): void => {
+    setProfileDropdown((prevState) => !prevState)
+}
+
 
 const isNavbarActive = ()=>{
 window.scrollY>0 ? setIsActive(true): setIsActive(false);
@@ -54,7 +62,25 @@ console.log(isActive)
               </button>
             </Link>
           ) : (
-            <button className="border px-4 py-1 rounded ">Logout</button>
+            <div className="relative group  ">
+   <div className="flex flex-col items-center">
+    <button 
+    className="bg-sky-100 w-9 font-semibold text-gray-500 h-9 rounded-full"
+    onClick={toggleDropdownHandler}
+    >
+      {user?.username.charAt(0)}
+      </button>
+    <div className={`lg:hidden  transition-all duration-500 pt-4 lg:absolute lg:bottom-0  lg:transform lg:translate-y-full lg:group-hover:block w-max  `}>
+{profileDropdown&&<ul className="bg-slate-200 lg:bg-white   text-center flex flex-col  shadow-lg rounded-lg overflow-hidden ">
+<li className="py-1.5 px-5 hover:bg-blue-50" > <Link to="/my-reservations">My Reservations</Link></li>
+<li className="py-1.5  px-5 hover:bg-blue-50"> <Link to="/profile">Profile</Link></li>
+<li className="py-1.5  px-5 hover:bg-blue-50"> <Link to="/settings">Settings</Link></li>
+  <li className="py-1.5  px-5 hover:bg-blue-50"><button onClick={()=>console.log("LOGOUT")}>Logout</button></li>
+</ul>}
+    </div>
+   </div>
+
+            </div>
           )}
         </div>
       </section>

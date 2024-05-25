@@ -8,9 +8,9 @@ import { AiOutlineClose } from 'react-icons/ai';
 interface IService{
 name:string;
 price:number;
-time:number;
+estimatedTime:number;
 description:string;
-img:string;
+image:string;
 }
 
 interface IProps{
@@ -28,7 +28,7 @@ const ServiceCard:React.FC<IProps> = ({service,className}) => {
         `}>
             <Link to="service">
                 <img
-                    src={service.img}
+                    src={service.image || images.DogBathImage}
                     alt="title"
                     className='w-full object-cover object-center h-auto md:h-52 lg:h-48 xl:h-50' />
             </Link>
@@ -49,7 +49,7 @@ const ServiceCard:React.FC<IProps> = ({service,className}) => {
 
 <div className='flex items-center gap-x-2 md:gap-x-2.5'>
 <GoClockFill className='text-gray-600'/>
-<span className='font-semibold text-gray-600'>{service.time}</span>
+<span className='font-semibold text-gray-600'>{service.estimatedTime}</span>
 
 </div>
 <div className='flex items-center gap-x-2 md:gap-x-2.5'>
