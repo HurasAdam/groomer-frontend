@@ -24,12 +24,13 @@ reservationDate:string;
 interface IProps{
     reservation:IReservation;
     className?:string;
+    cancelReservationHandler:()=>void;
 }
 
 
 
 
-const ReservationCard:React.FC<IProps> = ({reservation,className}) => {
+const ReservationCard:React.FC<IProps> = ({reservation,cancelReservationHandler,className}) => {
 
  
     return (
@@ -75,7 +76,12 @@ const ReservationCard:React.FC<IProps> = ({reservation,className}) => {
 
 </div>
 
-<button className='bg-rose-600 h-fit my-auto  px-6 py-2 rounded-md text-white font-semibold hover:bg-rose-500 transition-all'>Odwołaj</button>
+<button 
+onClick={()=>cancelReservationHandler({id:reservation?._id})}
+className='bg-rose-600 h-fit my-auto  px-6 py-2 rounded-md text-white font-semibold hover:bg-rose-500 transition-all'
+>
+    Odwołaj
+    </button>
 </div>
 
                 
