@@ -23,7 +23,7 @@ const RegisterForm: React.FC<IRegisterFormProps> = ({ handleSave }) => {
   } = useForm({
     defaultValues: {
       name: "",
-      userName: "",
+      username: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -66,14 +66,14 @@ const RegisterForm: React.FC<IRegisterFormProps> = ({ handleSave }) => {
           <input
             type="text"
             id="username"
-            {...register("userName", { required: "username is required" })}
+            {...register("username", { required: "username is required" })}
             className={`py-3 px-3 bg-slate-100 rounded mt-1 outline-none ${
-              errors.userName ? "border border-rose-600" : ""
+              errors.username ? "border border-rose-600" : ""
             }`}
           />
-          {errors.userName && (
+          {errors.username && (
             <span className="text-xs text-rose-500">
-              {errors.userName?.message}
+              {errors.username?.message}
             </span>
           )}
         </div>

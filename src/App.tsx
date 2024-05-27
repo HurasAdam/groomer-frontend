@@ -9,6 +9,7 @@ import ContactPage from "./pages/ContactPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import MyReservations from "./pages/MyReservations";
+import ServiceDetails from "./pages/ServiceDetails";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/our-story" element={<OurStoryPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/services/service/:id" element={<ServiceDetails />} />
             <Route path="/my-reservations" element={<MyReservations/>} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/404" element={<ErrorPage />} />

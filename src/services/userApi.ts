@@ -26,3 +26,12 @@ return data;
     console.log(`Error:${error}`)
   }
 }
+
+export const getAllEmployees = async()=>{
+  try{
+    const {data}= await axios.get("http://localhost:3000/api/users/employees");
+    return data;
+  }catch(error){
+    console.log(`ERROR:${error}`)
+  }
+}

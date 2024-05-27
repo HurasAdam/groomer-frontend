@@ -19,7 +19,7 @@ interface IProps{
 
 const ServiceCard:React.FC<IProps> = ({service,className}) => {
 
- 
+console.log(service)
     return (
         <div
             className={`rounded-xl overflow-hidden 
@@ -60,8 +60,13 @@ const ServiceCard:React.FC<IProps> = ({service,className}) => {
 
 
 </div>
-
-<button className='bg-blue-500 h-fit my-auto  px-6 py-2 rounded-md text-white font-semibold hover:bg-blue-400 transition-all'>Umów</button>
+<Link to={`service/${service?._id}`}>
+<button 
+className='bg-blue-500 h-fit my-auto  px-6 py-2 rounded-md text-white font-semibold hover:bg-blue-400 transition-all'
+>
+    Umów
+    </button>
+    </Link>
 </div>
 
                 
