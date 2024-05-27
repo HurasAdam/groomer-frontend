@@ -1,4 +1,5 @@
 import axios from "axios"
+import * as types from "../types/index";
 
 export const getMyReservations = async({id})=>{
 
@@ -6,7 +7,7 @@ export const getMyReservations = async({id})=>{
     return data;
 }
 
-export const createReservation = async({formData,token})=>{
+export const createReservation = async({formData,token}:{formData:types.IFormData,token:string | undefined})=>{
     const config = {
         headers: {
             Authorization: `Bearer ${token}`

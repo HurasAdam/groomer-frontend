@@ -1,6 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import { IoIosCheckmarkCircle } from "react-icons/io";
+import * as types from "../types/index";
 
 
 const racesList = [
@@ -25,8 +26,14 @@ const racesList = [
     { label: "Yorkshire Terrier", value: "yorkshire-terrier" }
   ];
   
+interface IProps{
+  employees:types.IEmployee[];
+  serviceId:string;
+  onSave:({formData}:{formData:types.IFormData})=>void;
+}
 
-const ReservationForm:React.FC = ({employees,serviceId,onSave}) => {
+
+const ReservationForm:React.FC<IProps> = ({employees,serviceId,onSave}) => {
 
 
 
@@ -50,7 +57,7 @@ const renderCheckmark = (field: string) => {
   };
 
 
-  const onSubmit = handleSubmit((data) => {
+  const onSubmit = handleSubmit((data:types.IFormData) => {
     const { serviceId, petName, petRace, employee, reservationDate, extraInfo } = data;
     const formData= { serviceId, petName, petRace, employee, reservationDate };
 

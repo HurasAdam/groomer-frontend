@@ -10,6 +10,7 @@ import { FaCoins } from "react-icons/fa";
 import { utils } from '../utils'
 import { createReservation } from '../services/reservationsApi'
 import { useAccountStore } from '../Store/store'
+import * as types from "../types/index";
 
 
 
@@ -35,14 +36,14 @@ const {data:serviceDetails}=useQuery({
 
 
 const {mutate}=useMutation({
-    mutationFn:({formData})=>{
+    mutationFn:({formData}:{formData:types.IFormData})=>{
         return createReservation({formData,token:user?.token})
     }
 })
 
-const onSave=({formData}):void=>{
-mutate({formData})
-}
+const onSave = ({ formData }: { formData: types.IFormData })=> {
+  mutate({ formData });
+};
 
 
   return (
