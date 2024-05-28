@@ -1,9 +1,15 @@
 import axios from "axios"
 import * as types from "../types/index";
 
-export const getMyReservations = async({id})=>{
+export const getMyReservations = async({token})=>{
 
-    const {data}= await axios.get(`http://localhost:3000/api/reservations/myReservations/${id}`);
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const {data}= await axios.get(`http://localhost:3000/api/reservations/myReservations`,config);
     return data;
 }
 
