@@ -1,12 +1,13 @@
 import React from 'react'
-import { useMutation, useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { getService } from '../services/servicesApi'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import images from '../Constants/imaegs'
 import ReservationForm from '../forms/ReservationForm'
 import { getAllEmployees } from '../services/userApi'
 import { FaClock } from "react-icons/fa6";
 import { FaCoins } from "react-icons/fa";
+import toast from "react-hot-toast";
 import { utils } from '../utils'
 import { createReservation } from '../services/reservationsApi'
 import { useAccountStore } from '../Store/store'
@@ -17,6 +18,8 @@ import * as types from "../types/index";
 const ServiceDetails:React.FC = () => {
     const {id}=useParams();
     const user = useAccountStore((state) => state.account);
+    const queryClient= useQueryClient();
+    const navigate = useNavigate();
 
 
     const {data:employees}=useQuery({
@@ -38,6 +41,15 @@ const {data:serviceDetails}=useQuery({
 const {mutate}=useMutation({
     mutationFn:({formData}:{formData:types.IFormData})=>{
         return createReservation({formData,token:user?.token})
+    },
+    onSuccess:(data)=>{
+      queryClient.invalidateQueries(["serviceDetails"]);
+      toast.success(data.message);
+      navigate("/")
+    },
+    onError:(error)=>{
+      console.log(error);
+      toast.error("Something went wrong , please try again later.")
     }
 })
 

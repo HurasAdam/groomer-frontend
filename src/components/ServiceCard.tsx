@@ -40,11 +40,11 @@ console.log(service)
             <div className='p-5'>
                 <Link to="service">
                     <h2
-                        className='font-roboto font-bold text-xl text-dark-soft md:text-2xl lg:text-[24px] '>
+                        className='font-roboto font-bold text-xl text-dark-soft md:text-2xl lg:text-[24px] text-gray-800 '>
                         {service.name}
                     </h2>
                 </Link>
-                <p className='text-dark-light mt-3 text-sm md:text-lg'>
+                <p className='text-dark-light mt-3 text-sm md:text-base text-gray-700'>
                     {service.description}
                 </p>
 <div className='flex justify-between'>
@@ -60,10 +60,7 @@ console.log(service)
 <FaCoins className='text-gra-600'/>
 <span className='text-gray-600 font-semibold'>{service.price} zł</span>
 </div>
-<div className='flex items-center gap-x-2 md:gap-x-2.5'>
-<FaCoins className='text-gra-600'/>
-<span className='text-gray-600 font-semibold'>{service.price} zł</span>
-</div>
+
 
 
 </div>

@@ -10,6 +10,7 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import MyReservations from "./pages/MyReservations";
 import ServiceDetails from "./pages/ServiceDetails";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
           </Route>
         </Routes>
       </Router>
+      <Toaster/>
     </main>
   );
 };

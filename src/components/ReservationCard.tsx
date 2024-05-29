@@ -28,12 +28,12 @@ const ReservationCard:React.FC<IProps> = ({reservation,cancelReservationHandler,
         shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] ${className}
         
         `}>
-            <Link to="service">
+            
                 <img
                     src={images.DogBathImage}
                     alt="title"
                     className='w-full object-cover object-center h-auto md:h-52 lg:h-48 xl:h-50' />
-            </Link>
+          
 
             <div className='p-5'>
              <div className='border-b py-1.5 border-gray-200 flex justify-between '>
