@@ -1,30 +1,19 @@
 import React from 'react'
 import { GoClockFill } from 'react-icons/go'
 import { FaCoins } from "react-icons/fa";
+import { IoPersonCircle } from "react-icons/io5";
 import images from '../Constants/imaegs'
 import { Link } from 'react-router-dom';
 import { utils } from '../utils';
+import * as types from "../types/index";
 
-interface IService{
-    _id:string;
-    name:string;
-    price:number;
-    description:string;
-    estimatedTime:number;
-    image:string;
-}
 
-interface IReservation{
-_id:string;
-service:IService;
-reservationDate:string;
-}
 
 
 interface IProps{
-    reservation:IReservation;
+    reservation:types.IReservation;
     className?:string;
-    cancelReservationHandler:()=>void;
+    cancelReservationHandler:({id}:{id:string})=>void;
 }
 
 
@@ -63,6 +52,11 @@ const ReservationCard:React.FC<IProps> = ({reservation,cancelReservationHandler,
 <div className='flex flex-col flex-nowrap  mt-6'>
 
 <div className='flex items-center gap-x-2 md:gap-x-2.5'>
+<IoPersonCircle className='w-[19px] h-auto text-gray-600'/>
+<span className='text-gray-600 font-semibold'>{reservation?.assignedEmployee?.username}</span>
+</div>
+
+<div className='flex items-center gap-x-2 md:gap-x-2.5'>
 <GoClockFill className='text-gray-600'/>
 <span className='font-semibold text-gray-600'>{utils.convertMinutesToHours(reservation?.service?.estimatedTime) }</span>
 
@@ -71,7 +65,6 @@ const ReservationCard:React.FC<IProps> = ({reservation,cancelReservationHandler,
 <FaCoins className='text-gra-600'/>
 <span className='text-gray-600 font-semibold'>{reservation?.service?.price} zł</span>
 </div>
-
 
 
 </div>

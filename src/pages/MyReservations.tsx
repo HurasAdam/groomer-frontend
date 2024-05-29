@@ -2,8 +2,8 @@ import React from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { cancelReservation, getMyReservations } from '../services/reservationsApi'
 import { useAccountStore } from '../Store/store';
-import ServiceCard from '../components/ServiceCard';
 import ReservationCard from '../components/ReservationCard';
+import * as types from "../types/index";
 
 const MyReservations:React.FC = () => {
     const user = useAccountStore((state) => state.account);
@@ -12,7 +12,7 @@ const queryClient = useQueryClient();
 
 
 
-    const {data:reservations}=useQuery({
+    const {data:reservations}=useQuery<types.IReservation[]>({
         queryFn:()=>{
             return getMyReservations({token:user?.token})
         },
@@ -29,7 +29,7 @@ const {mutate}=useMutation({
 })
 
 
-const cancelReservationHandler= ({id})=>{
+const cancelReservationHandler= ({id}:{id:string})=>{
 mutate({id})
 }
 

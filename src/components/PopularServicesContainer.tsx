@@ -4,8 +4,18 @@ import CONSTANTS from "../Constants";
 
 import ServiceCard from "./ServiceCard";
 import { Link } from "react-router-dom";
+import { getAllServices } from "../services/userApi";
+import { useQuery } from "react-query";
 
 const PopularServicesContainer: React.FC = () => {
+
+  const {data:services}=useQuery({
+    queryFn:()=>{
+      return getAllServices();
+    },
+    queryKey:["services"]
+  })
+  
   return (
     
       <section className={ `w-full mx-auto flex flex-col pt-24 pb-20 } ` }>
@@ -23,7 +33,7 @@ const PopularServicesContainer: React.FC = () => {
       
       
       <div className="  flex justify-between  border-slate-900 flex-wrap gap-6">
-      {CONSTANTS.POPULAR_SERVICES.map((service,index)=>{
+      {services?.map((service,index)=>{
         return(
       <ServiceCard 
       key={index}

@@ -3,18 +3,22 @@ import { GoClockFill } from 'react-icons/go'
 import { FaCoins } from "react-icons/fa";
 import images from '../Constants/imaegs'
 import { Link } from 'react-router-dom';
-import { AiOutlineClose } from 'react-icons/ai';
 
 interface IService{
+    _id:string;
 name:string;
 price:number;
+created:string;
 estimatedTime:number;
 description:string;
+animal:string;
 image:string;
+reservationCount:number;
 }
 
 interface IProps{
     service:IService;
+    className?:string;
 }
 
 const ServiceCard:React.FC<IProps> = ({service,className}) => {
@@ -56,11 +60,14 @@ console.log(service)
 <FaCoins className='text-gra-600'/>
 <span className='text-gray-600 font-semibold'>{service.price} zł</span>
 </div>
-
+<div className='flex items-center gap-x-2 md:gap-x-2.5'>
+<FaCoins className='text-gra-600'/>
+<span className='text-gray-600 font-semibold'>{service.price} zł</span>
+</div>
 
 
 </div>
-<Link to={`service/${service?._id}`}>
+<Link to={`services/service/${service?._id}`}>
 <button 
 className='bg-blue-500 h-fit my-auto  px-6 py-2 rounded-md text-white font-semibold hover:bg-blue-400 transition-all'
 >

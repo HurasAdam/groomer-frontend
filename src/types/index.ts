@@ -14,3 +14,26 @@ export interface IFormData{
     avatar?:string;
     role:string;
   }
+
+  export interface IService{
+    _id:string;
+    name:string;
+    price:number;
+    description:string;
+    estimatedTime:number;
+    image:string;
+}
+
+export interface IAsignedEmployee{
+    _id:string;
+    username:string;
+    avatar?:string
+}
+export interface IReservation{
+_id:string;
+service:IService;
+reservationDate:string;
+petName:string;
+petRace:string;
+assignedEmployee:IAsignedEmployee
+}
