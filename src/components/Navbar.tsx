@@ -3,6 +3,7 @@ import NavbarLinks from "../Constants/NavbarLinks";
 import { Link } from "react-router-dom";
 import { useAccountStore } from "../Store/store";
 import CONSTANTS from "../Constants";
+import { UserRole } from "../Constants/enums";
 
 
 const Navbar: React.FC = () => {
@@ -74,11 +75,18 @@ console.log(isActive)
       </button>
     <div className={`lg:hidden  transition-all duration-500 pt-4 lg:absolute lg:bottom-0  lg:transform lg:translate-y-full lg:group-hover:block w-max  `}>
 {profileDropdown&&<ul className="bg-slate-200 lg:bg-white   text-center flex flex-col  shadow-lg rounded-lg overflow-hidden ">
-{CONSTANTS.DROPDOWNLINKS.map(({link,label})=>{
+{user?.role===UserRole.CLIENT &&CONSTANTS.DROPDOWNLINKS.client.map(({link,label})=>{
   return(
     <li className="py-1.5 px-5 hover:bg-blue-50" > <Link to={link}>{label}</Link></li>
   )
 })}
+
+{user?.role===UserRole.ADMIN &&CONSTANTS.DROPDOWNLINKS.admin.map(({link,label})=>{
+  return(
+    <li className="py-1.5 px-5 hover:bg-blue-50" > <Link to={link}>{label}</Link></li>
+  )
+})}
+
 <li className="py-1.5 px-5 hover:bg-blue-50"><button  onClick={()=>console.log("LOGOUT")}>Wyloguj</button>
 </li>
 </ul>}

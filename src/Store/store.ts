@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { UserRole } from '../Constants/enums';
 
 type IAccountStore = {
     isLoggedIn: boolean;
@@ -14,6 +15,7 @@ type IUser = {
     _id: string;
     token:string;
     username:string;
+    role:UserRole;
 }
 
 const checkUserPersist = localStorage.getItem("user")

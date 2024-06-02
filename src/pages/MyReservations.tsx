@@ -4,6 +4,7 @@ import { cancelReservation, getMyReservations } from '../services/reservationsAp
 import { useAccountStore } from '../Store/store';
 import ReservationCard from '../components/ReservationCard';
 import * as types from "../types/index";
+import { FaCalendarCheck } from "react-icons/fa";
 
 const MyReservations:React.FC = () => {
     const user = useAccountStore((state) => state.account);
@@ -39,7 +40,7 @@ mutate({id})
   return (
     <div className='max-w-[1300px] mx-auto py-10 '>
         <div>
-            <h2 className='text-3xl text-gray-700 font-semibold mb-10'>My Reservations</h2>
+            <h2 className='flex gap-2 items-center text-3xl text-gray-700 font-semibold mb-10'><FaCalendarCheck/>Moje rezerwacje</h2>
             <div className='flex flex-col gap-7'>
                 {reservations?.map((reservation)=>{
                     return(
