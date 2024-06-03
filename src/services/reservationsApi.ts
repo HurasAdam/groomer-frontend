@@ -29,3 +29,16 @@ export const cancelReservation = async({id})=>{
     const {data}= await axios.delete(`http://localhost:3000/api/reservations/myReservations/cancel/${id}`);
     return data;
 }
+
+
+export const getReservations =async({token}:{token:string})=>{
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const {data}= await axios.get("http://localhost:3000/api/admin/reservations",config);
+    return data;
+}

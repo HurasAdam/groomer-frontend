@@ -35,3 +35,20 @@ export const getAllEmployees = async()=>{
     console.log(`ERROR:${error}`)
   }
 }
+
+
+
+export const getDetailedEmployeesList = async({token}:{token:string})=>{
+  try{
+    const config = {
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+  }
+
+    const {data}= await axios.get("http://localhost:3000/api/admin/employees",config);
+    return data;
+  }catch(error){
+    console.log(`ERROR:${error}`)
+  }
+}

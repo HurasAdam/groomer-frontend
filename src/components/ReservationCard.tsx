@@ -19,7 +19,7 @@ interface IProps{
 
 
 
-const ReservationCard:React.FC<IProps> = ({reservation,cancelReservationHandler,className}) => {
+const ReservationCard:React.FC<IProps> = ({manage,reservation,cancelReservationHandler,className}) => {
 
  
     return (
@@ -38,8 +38,13 @@ const ReservationCard:React.FC<IProps> = ({reservation,cancelReservationHandler,
             <div className='p-5'>
              <div className='border-b py-1.5 border-gray-200 flex justify-between '>
                     <h2
-                        className='font-roboto font-bold text-xl text-dark-soft md:text-2xl lg:text-[24px] '>
-                        {reservation?.service?.name}
+                        className='font-roboto font-bold text-xl text-dark-soft md:text-2xl lg:text-[24px] flex gap-2'>
+                       <div className='flex flex-col '>
+               {manage &&       (<><span className='block bg-orange-50 rounded-full mx-auto px-2 text-md font-bold text-orange-300'>A</span>
+                        <span className='text-sm'>
+                        {reservation?.owner?.username}
+                        </span></>)}
+                        </div> {reservation?.service?.name}
                     </h2>
                     <span className='text-gray-600 font-semibold text-normal'>{new Date(reservation.reservationDate).toLocaleDateString()}</span>
                     </div>

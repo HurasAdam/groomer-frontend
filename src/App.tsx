@@ -11,6 +11,11 @@ import LoginPage from "./pages/LoginPage";
 import MyReservations from "./pages/MyReservations";
 import ServiceDetails from "./pages/ServiceDetails";
 import { Toaster } from "react-hot-toast";
+import ManagerLayout from "./Layout/ManagerLayout";
+import Dashboard from "./pages/Manager/Dashboard";
+import Reservations from "./pages/Manager/Reservations";
+import Services from "./pages/Manager/Services";
+import Employees from "./pages/Manager/Employees";
 
 const App = () => {
   return (
@@ -29,6 +34,18 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/404" element={<ErrorPage />} />
           </Route>
+
+
+
+
+          <Route element={<ManagerLayout />}>
+            <Route path="/manage" element={<Dashboard/>} />
+            <Route path="/manage/reservations" element={<Reservations/>} />
+            <Route path="/manage/services" element={<Services/>} />
+            <Route path="/manage/employees" element={<Employees/>} />
+
+          </Route>
+
         </Routes>
       </Router>
       <Toaster/>
