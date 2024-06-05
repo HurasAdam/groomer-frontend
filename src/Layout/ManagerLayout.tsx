@@ -22,7 +22,7 @@ const AdminNavbarLinks=[
     },
     {
         label:"Użytkownicy",
-        link:"/"
+        link:"/manage/customers"
     },
     {
         label:"Powrót",

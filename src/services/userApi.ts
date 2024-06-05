@@ -52,3 +52,18 @@ export const getDetailedEmployeesList = async({token}:{token:string})=>{
     console.log(`ERROR:${error}`)
   }
 }
+
+export const getDetailedCustomersList = async({token}:{token:string})=>{
+  try{
+    const config = {
+      headers: {
+          Authorization: `Bearer ${token}`
+      }
+  }
+
+    const {data}= await axios.get("http://localhost:3000/api/admin/customers",config);
+    return data;
+  }catch(error){
+    console.log(`ERROR:${error}`)
+  }
+}
