@@ -3,21 +3,16 @@ import { GoClockFill } from 'react-icons/go'
 import { FaCoins } from "react-icons/fa";
 import { IoPersonCircle } from "react-icons/io5";
 import images from '../Constants/imaegs'
-import { Link } from 'react-router-dom';
 import { utils } from '../utils';
 import * as types from "../types/index";
 
 
-
-
 interface IProps{
+    manage?:boolean;
     reservation:types.IReservation;
     className?:string;
     cancelReservationHandler:({id}:{id:string})=>void;
 }
-
-
-
 
 const ReservationCard:React.FC<IProps> = ({manage,reservation,cancelReservationHandler,className}) => {
 
@@ -46,7 +41,11 @@ const ReservationCard:React.FC<IProps> = ({manage,reservation,cancelReservationH
                         </span></>)}
                         </div> {reservation?.service?.name}
                     </h2>
+               
+                  
+      
                     <span className='text-gray-600 font-semibold text-normal'>{new Date(reservation.reservationDate).toLocaleDateString()}</span>
+                    
                     </div>
                 <p className='text-dark-light mt-3 text-sm md:text-lg'>
                     {reservation?.service?.description}
@@ -74,18 +73,21 @@ const ReservationCard:React.FC<IProps> = ({manage,reservation,cancelReservationH
 
 </div>
 
-<button 
+{ reservation?.isPending && (<button 
 onClick={()=>cancelReservationHandler({id:reservation?._id})}
 className='bg-rose-600 h-fit my-auto  px-6 py-2 rounded-md text-white font-semibold hover:bg-rose-500 transition-all'
 >
     Odwołaj
-    </button>
+    </button>)}
+    {reservation?.isCanceled && (
+        <span className='bg-rose-900 h-fit my-auto  px-6 py-2 rounded-md text-white font-semibold '>Anulowana</span>
+    )}
+
+    {reservation?.isCompleted && (
+    <span className='bg-green-600 h-fit my-auto  px-6 py-2 rounded-md text-white font-semibold'>Zrealizowana</span>
+    )}
 </div>
-
-                
             </div>
-
-
         </div>
     )
 }

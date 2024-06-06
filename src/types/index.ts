@@ -35,5 +35,8 @@ service:IService;
 reservationDate:string;
 petName:string;
 petRace:string;
-assignedEmployee:IAsignedEmployee
+assignedEmployee:IAsignedEmployee;
+isPending:boolean;
+isCompleted:boolean;
+isCanceled:boolean;
 }

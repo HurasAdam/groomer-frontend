@@ -1,12 +1,12 @@
 import React from 'react'
 import { useAccountStore } from '../../Store/store';
-import { getReservations } from '../../services/reservationsApi';
-import { useQuery } from 'react-query'
+import { cancelReservation, getReservations } from '../../services/reservationsApi';
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 import ReservationCard from '../../components/ReservationCard';
 
 
 const Reservations:React.FC = () => {
-
+const queryClient = useQueryClient();
     const user = useAccountStore((state) => state.account);
 
 const {data:reservations}=useQuery({
@@ -16,8 +16,19 @@ const {data:reservations}=useQuery({
     queryKey:["reservations"]
 })
 
+const {mutate}=useMutation({
+    mutationFn:({id})=>{
+        return cancelReservation({id})
+    },
+    onSuccess:()=>{
+        queryClient.invalidateQueries("reservations")
+    }
+})
 
-console.log(reservations)
+
+const cancelReservationHandler = ({id})=>{
+    mutate({id})
+}
 
 
   return (
@@ -25,7 +36,7 @@ console.log(reservations)
 
 {reservations?.map((reservation)=>{
     return(
-        <ReservationCard manage={true} reservation={reservation}/>
+        <ReservationCard manage={true} reservation={reservation} cancelReservationHandler={cancelReservationHandler}/>
     )
 })}
 
