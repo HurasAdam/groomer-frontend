@@ -17,7 +17,7 @@ const PopularServicesContainer: React.FC = () => {
   })
   
   return (
-    
+    services?.length>0 ?<>
       <section className={ `w-full mx-auto flex flex-col pt-24 pb-20 } ` }>
       
       
@@ -32,7 +32,7 @@ const PopularServicesContainer: React.FC = () => {
       </div>
       
       
-      <div className="  flex justify-between  border-slate-900 flex-wrap gap-6">
+      <div className={`${services && services.length<3 ? "flex" : "flex justify-between"} border-slate-900 flex-wrap gap-6  min-w-[1300px]`}>
       {services?.map((service,index)=>{
         return(
       <ServiceCard 
@@ -47,6 +47,7 @@ const PopularServicesContainer: React.FC = () => {
         </div>
       <Link to="/services" className="bg-blue-600 w-fit mx-auto font-semibold text-white py-3 px-3 rounded-lg ">Zobacz więcej</Link>
           </section>
+          </>:<></>
         )
   
 };

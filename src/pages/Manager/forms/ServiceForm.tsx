@@ -1,9 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { FaCat } from "react-icons/fa";
+import { FaDog } from "react-icons/fa6";
+import { FaCoins } from "react-icons/fa";
+import { MdOutlineAccessTimeFilled } from "react-icons/md";
 
 const animalCategories=[
-    {label:"kot",value:"kot"},
-    {label:"pies",value:"pies"},  
+    {label:"kot",value:"kot", icon:FaCat },
+    {label:"pies",value:"pies",icon:FaDog},  
 ]
 
 
@@ -31,7 +35,7 @@ const serviceEstimatedTimeOptions=[
 const ServiceForm:React.FC = ({handleSave}) => {
 
 
-const {register,handleSubmit,formState:{errors}}=useForm({
+const {register,handleSubmit,watch,formState:{errors}}=useForm({
     defaultValues:{
         name:"",
         description:"",
@@ -51,7 +55,8 @@ const onSubmit = handleSubmit((data) => {
     console.log(data)
   });
 
-
+const pet = watch("estimatedTime")
+console.log(pet)
   return (
     <form 
     onSubmit={onSubmit}
@@ -65,13 +70,17 @@ const onSubmit = handleSubmit((data) => {
         return(
            <label 
            htmlFor={category?.label} 
-           className='text-sm flex gap-1 text-gray-700 cursor-pointer bg-gray-200 rounded p-4 mt-3 truncate md:mt-2'>
+           className={`${watch("animal") ===category?.label? "bg-indigo-300 font-bold":"bg-slate-200 text-semibold"} text-sm flex gap-1 text-gray-700 cursor-pointer bg-gray-200 rounded p-4 mt-3 truncate md:mt-2`}
+          >
             <input type="radio"
                    {...register("animal",{required:"Kategoria usługi jest wymagana"})}
             name="animal"
             id={category?.label}
             value={category?.label}
+            className='hidden'
+        
             />
+            <category.icon    className={`${watch("animal") ===category?.label? "text-slate-700":"text-slate-400"} text-xl`} />
             {category?.label}
            </label>
         )
@@ -105,7 +114,10 @@ const onSubmit = handleSubmit((data) => {
 
 <div className='flex flex-col gap-9 border p-5 rounded-md  border-gray-300'>
 <div>
-    <span>Cena Usługi</span>
+<div className='flex gap-2 items-center mb-4 text-slate-600 font-semibold '>
+<FaCoins/>
+<span>Cena Usługi</span>
+</div>
 <div className='grid-row-5 gap-3  md:gap-3 lg:grid'>
 
 {servicePricing.map((pricing)=>{
@@ -132,12 +144,13 @@ const onSubmit = handleSubmit((data) => {
         return(
            <label 
            htmlFor={priceType?.label} 
-           className='text-sm flex gap-1 text-gray-700 cursor-pointer bg-gray-200 rounded p-4 mt-3 truncate md:mt-2'>
+           className={`${watch("isPromotion") ===priceType.value.toString()? "bg-indigo-300 font-bold text-white":"font-semibold"} text-sm flex gap-1 text-gray-700 cursor-pointer bg-gray-200 rounded p-4 mt-3 truncate md:mt-2`}>
             <input type="radio"
             {...register(priceType?.formValue)}
             name="isPromotion"
             id={priceType?.label}
             value={priceType?.value}
+            className='hidden'
             />
             {priceType?.label}
            </label>
@@ -146,18 +159,22 @@ const onSubmit = handleSubmit((data) => {
 </div>
 
 <div>
-    <span>Czas wykonywania</span>
+<div className='text-slate-500 font-semibold flex items-center gap-2 mb-4'>
+<MdOutlineAccessTimeFilled/>
+<span>Czas wykonywania</span>
+</div>
 <div className='grid-row-5 gap-3 md:grid-cols-2 md:gap-3 lg:grid '>
     {serviceEstimatedTimeOptions.map((option)=>{
         return(
            <label 
            htmlFor={option?.label} 
-           className='text-sm flex gap-1 text-gray-700 cursor-pointer bg-gray-200 rounded p-4 mt-3 truncate md:mt-2'>
+           className={`${watch("estimatedTime") ===option?.label.toString() ? "bg-indigo-300":""} text-sm flex gap-1 text-gray-700 cursor-pointer bg-gray-200 rounded p-4 mt-3 truncate md:mt-2`}>
             <input type="radio"
             {...register(option?.formValue)}
             name="estimatedTime"
             id={option?.label}
             value={option?.label}
+            className='hidden'
             />
             {option?.label} min
            </label>
