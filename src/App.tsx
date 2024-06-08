@@ -17,6 +17,7 @@ import Reservations from "./pages/Manager/Reservations";
 import Services from "./pages/Manager/Services";
 import Employees from "./pages/Manager/Employees";
 import Customers from "./pages/Manager/Customers";
+import NewService from "./pages/Manager/views/NewService";
 
 const App = () => {
   return (
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="/manage" element={<Dashboard/>} />
             <Route path="/manage/reservations" element={<Reservations/>} />
             <Route path="/manage/services" element={<Services/>} />
+            <Route path="/manage/services/new" element={<NewService/>} />
             <Route path="/manage/employees" element={<Employees/>} />
             <Route path="/manage/customers" element={<Customers/>} />
           </Route>

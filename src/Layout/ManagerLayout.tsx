@@ -46,35 +46,36 @@ import { AiFillDashboard } from 'react-icons/ai'
 const MENU_ITEMS = [
     {
       title: "Dashboard",
-      link: "/admin",
+      link: "/manage",
       icon: <AiFillDashboard className="text-xl" />,
       name: "dashboard",
       type: "link",
     },
   
     {
-      title: "Comments",
-      link: "/admin/comments",
+      title: "Rezerwacje",
+      link: "/manage/reservations",
       icon: <FaComments className="text-xl" />,
       name: "comments",
       type: "link",
     },
   
     {
-      title: "Posts",
+      title: "Usługi",
       content: [
-        { title: "New", link: "/admin/posts/new" },
-        { title: "Manage", link: "/admin/posts/manage" },
+        { title: "Zarządzaj usługami", link: "/manage/services" },
+        { title: "Dodaj usługę", link: "/manage/services/new" },
+   
       ],
       icon: <MdDashboard className="text-xl" />,
       name: "posts",
       type: "collapse",
     },
     {
-      title: "Categories",
+      title: "Pracownicy",
       content: [
-        { title: "New", link: "/admin/categories/new" },
-        { title: "Manage", link: "/admin/categories/manage" },
+        { title: "Dodaj Pracownika", link: "/admin/categories/new" },
+        { title: "Zarządzaj", link: "/admin/categories/manage" },
       ],
       icon: <MdCategory className="text-xl" />,
       name: "categories",
@@ -93,7 +94,7 @@ const MENU_ITEMS = [
   
   
     {
-      title: "Users",
+      title: "Klienci",
       link: "/admin/users",
       icon: <MdPeopleAlt className="text-xl" />,
       name: "users",
