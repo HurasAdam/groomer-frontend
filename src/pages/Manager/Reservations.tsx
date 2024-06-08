@@ -32,7 +32,7 @@ const cancelReservationHandler = ({id})=>{
 
 
   return (
-    <div className='p-8'>
+    <div className='px-8 py-4'>
 
 {reservations?.map((reservation)=>{
     return(

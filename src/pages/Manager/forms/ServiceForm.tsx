@@ -32,24 +32,27 @@ const serviceEstimatedTimeOptions=[
 ]
 
 
-const ServiceForm:React.FC = ({handleSave}) => {
+const ServiceForm:React.FC = ({handleSave,serviceDetails}) => {
 
 
-const {register,handleSubmit,watch,formState:{errors}}=useForm({
+const {register,handleSubmit,watch,formState:{errors},getValues}=useForm({
     defaultValues:{
-        name:"",
-        description:"",
-        estimatedTime:"",
-        animal:"",
-        image:"",
-        price:"",
-        promotionPrice:"",
-        isPromotion:"",
-        discountPrice:""
-
-    }
+        name:serviceDetails ? serviceDetails?.name : "",
+        description: serviceDetails? serviceDetails?.description :"",
+        estimatedTime: serviceDetails ? serviceDetails?.estimatedTime :"",
+        animal: serviceDetails ? serviceDetails?.animal :"",
+        image: serviceDetails ? serviceDetails?.image :"",
+        price: serviceDetails ? serviceDetails?.price :"",
+        promotionPrice: serviceDetails ? serviceDetails?.promotionPrice :"",
+        isPromotion: serviceDetails ? serviceDetails?.isPromotion :"",
+        discountPrice: serviceDetails ? serviceDetails?.discountPrice :""
+    },
+    mode: "onChange",
 })
 
+const dane = getValues();
+console.log("dane")
+console.log(dane)
 const onSubmit = handleSubmit((data) => {
     handleSave({ formData: data });
     console.log(data)
@@ -62,10 +65,10 @@ console.log(pet)
     onSubmit={onSubmit}
     className='grid-row-5 gap-3 grid-cols-[3fr_2fr] md:gap-3 lg:grid lg:gap-8 '>
 
-<div className='flex flex-col gap-9'>
-    <div>
-        <span>Rodzaj usługi</span>
-<div className='grid-row-5 gap-3 md:grid-cols-2 md:gap-3 lg:grid '>
+<div className='flex flex-col gap-8'>
+    <div className='relative flex flex-col gap-1.5'>
+        <span className='text-slate-600 font-semibold text-sm'>Rodzaj usługi</span>
+<div className='grid-row-5 gap-3 md:grid-cols-2 md:gap-3 lg:grid  '>
     {animalCategories.map((category)=>{
         return(
            <label 
@@ -86,33 +89,41 @@ console.log(pet)
         )
     })}
 </div>
+{errors?.animal && (<span className='text-xs text-rose-600 absolute bottom-[-20px]'>{errors?.animal?.message}</span>)}
 </div>
-<div className='flex flex-col'>
-                <label htmlFor="">Nazwa usługi</label>
+<div className='flex flex-col relative gap-1.5'>
+                <label 
+                className='text-slate-600 font-semibold text-sm'
+                htmlFor="">Nazwa usługi</label>
                 <input
-                   {...register("name",{required:"Plese enter service name"})} 
+                   {...register("name",{required:"nazwa usługi jest wymagana"})} 
                 type="text" 
                 className='border rounded border-gray-300 w-full py-3  lg:py-1.5 px-2 xl:py-1 font-normal bg-slate-100' />
+                {errors?.name && (<span className='text-xs text-rose-600 absolute bottom-[-20px]'>{errors?.name?.message}</span>)}
             </div>
     
-            <div className='flex flex-col'>
-                <span >Opis usługi</span>
+            <div className='flex flex-col relative gap-1.5'>
+                <span className='text-slate-600 font-semibold text-sm' >Opis usługi</span>
                 <textarea
-                       {...register("description",{required:"Plese enter service description"})}  
+                       {...register("description",{required:"Opis usługi jest wymagany"})}  
                 rows={6} 
                 className='border rounded w-full py-3 border-gray-300   lg:py-1.5 px-2 xl:py-1 font-normal bg-slate-100' />
+                    {errors?.description && (<span className='text-xs text-rose-600 absolute bottom-[-20px]'>{errors?.description?.message}</span>)}
             </div>
 
-            <div className='flex flex-col my-auto'>
+            <div className='flex flex-col '>
                 <label className=' font-semibold text-gray-600 text-xl h-[150px] border-2 rounded border-dashed  flex justify-center items-center cursor-pointer ' htmlFor="file">Dodaj zdjęcie</label>
                 <input 
                 id="file"
                 type="file" 
                 className='hidden border rounded border-gray-300 w-full py-3  lg:py-1.5 px-2 xl:py-1 font-normal bg-slate-100' />
             </div>
+            <button 
+type='submit'
+className='bg-blue-500 text-slate-50 font-semibold text-normal py-2 rounded'>Dodaj Usługę</button>
 </div>
 
-<div className='flex flex-col gap-9 border p-5 rounded-md  border-gray-300'>
+<div className='flex flex-col gap-9 border p-5 rounded-md  border-gray-300 h-fit'>
 <div>
 <div className='flex gap-2 items-center mb-4 text-slate-600 font-semibold '>
 <FaCoins/>
@@ -124,15 +135,15 @@ console.log(pet)
     return(
        <label 
        htmlFor={pricing?.label} 
-       className='flex flex-col-reverse'>
+       className='flex flex-col-reverse text-slate-600 font-semibold'>
         <input type="text"
         {...register(pricing?.formValue)}
       
         id={pricing?.label}
        placeholder='PLN'
-       className='border  rounded w-full py-3  lg:py-1.5 px-2 xl:py-1 font-normal bg-slate-100 '
+       className='border  rounded w-full py-3  lg:py-1.5 px-2 xl:py-1.5 font-normal bg-slate-100 '
         />
-        {pricing?.label}
+      <span className='text-sm mb-1'>  {pricing?.label}</span>
        </label>
     )
 })}
@@ -144,7 +155,10 @@ console.log(pet)
         return(
            <label 
            htmlFor={priceType?.label} 
-           className={`${watch("isPromotion") ===priceType.value.toString()? "bg-indigo-300 font-bold text-white":"font-semibold"} text-sm flex gap-1 text-gray-700 cursor-pointer bg-gray-200 rounded p-4 mt-3 truncate md:mt-2`}>
+           className={`${typeof watch("isPromotion") === "boolean"
+            ? (watch("isPromotion") === priceType.value ? "bg-indigo-300 font-bold text-white" : "font-semibold")
+            : (watch("isPromotion") === priceType.value.toString() ? "bg-indigo-300 font-bold text-white" : "font-semibold")
+            } text-sm flex gap-1 text-gray-700 cursor-pointer bg-gray-200 rounded p-4 mt-3 truncate md:mt-2`}>
             <input type="radio"
             {...register(priceType?.formValue)}
             name="isPromotion"
@@ -168,7 +182,10 @@ console.log(pet)
         return(
            <label 
            htmlFor={option?.label} 
-           className={`${watch("estimatedTime") ===option?.label.toString() ? "bg-indigo-300":""} text-sm flex gap-1 text-gray-700 cursor-pointer bg-gray-200 rounded p-4 mt-3 truncate md:mt-2`}>
+           className={`${typeof watch("estimatedTime") === "number"
+            ? (watch("estimatedTime") === option.label ? "bg-indigo-300 font-bold text-white" : "font-semibold")
+            : (watch("estimatedTime") === option.label.toString() ? "bg-indigo-300 font-bold text-white" : "font-semibold")
+            } text-sm flex gap-1 text-gray-700 cursor-pointer bg-gray-200 rounded p-4 mt-3 truncate md:mt-2`}>
             <input type="radio"
             {...register(option?.formValue)}
             name="estimatedTime"
@@ -187,9 +204,7 @@ console.log(pet)
              
              
 
-<button 
-type='submit'
-className='bg-blue-500 text-slate-50 font-semibold text-normal py-2 rounded'>Dodaj Usługę</button>
+
         </form>
   )
 }

@@ -32,7 +32,7 @@ const PopularServicesContainer: React.FC = () => {
       </div>
       
       
-      <div className={`${services && services.length<3 ? "flex" : "flex justify-between"} border-slate-900 flex-wrap gap-6  min-w-[1300px]`}>
+      <div className={`${services && services.length<3 ? "flex min-w-[1300px] " : "flex justify-between flex-wrap"} border-slate-900 flex-wrap gap-6  `}>
       {services?.map((service,index)=>{
         return(
       <ServiceCard 

@@ -13,7 +13,7 @@ const {data:servicess}=useQuery({
 });
 
   return (
-    <div>
+    <div className='px-8 py-4'>
       {servicess?.map((service)=>{
         return(
           <ServiceCard manage={true} service={service}/>
