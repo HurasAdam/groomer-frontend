@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom";
+import { TiArrowSortedDown } from "react-icons/ti";
+import { TiArrowSortedUp } from "react-icons/ti";
+
 
 
 const NavItemCollapse: React.FC = ({ content, title, icon, name, activeNavName, setActiveNavName }) => {
@@ -31,7 +34,9 @@ const NavItemCollapse: React.FC = ({ content, title, icon, name, activeNavName, 
                 flex items-center gap-x-2 text-lg ${name === activeNavName ? "font-bold text-primary" : "font-semibold text-[#A5A5A5]"}`}>
                 {icon}
                 {title}
-
+<div className=" w-fit flex justify-start">
+   {name !== activeNavName ? <TiArrowSortedDown/> :<TiArrowSortedUp/>}
+</div>
             </label>
             <div className="">
 {      name===activeNavName &&          <div className="mt-2 flex flex-col gap-y-2 ">

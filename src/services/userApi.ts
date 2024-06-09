@@ -11,9 +11,14 @@ export const register = async ({ formData }) => {
 };
 
 export const login = async ({ formData }) => {
+
+  const config = {
+    withCredentials: true
+  };
+
   const { data } = await axios.post(
     "http://localhost:3000/api/users/login",
-    formData
+    formData,config
   );
   return data;
 };
@@ -66,4 +71,13 @@ export const getDetailedCustomersList = async({token}:{token:string})=>{
   }catch(error){
     console.log(`ERROR:${error}`)
   }
+}
+
+export const validateToken = async()=>{
+const config = {
+  withCredentials:true,
+
+}
+  const {data}= await axios.post("http://localhost:3000/api/auth/validateToken",{},config);
+  return data;
 }

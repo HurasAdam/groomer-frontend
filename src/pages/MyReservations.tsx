@@ -35,7 +35,7 @@ mutate({id})
 }
 
 
-    console.log("RESERVATIONS LIST")
+
  
   return (
     <div className='max-w-[1300px] mx-auto py-10 '>

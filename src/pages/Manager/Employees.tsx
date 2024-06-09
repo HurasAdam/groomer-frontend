@@ -16,7 +16,7 @@ const {data:employees}=useQuery({
 })
 
 const toggleEditEmployeePopup = ({employeeId})=>{
-  console.log(employeeId)
+  
   setEmployeeEditPopup((state)=>!state);
 }
 

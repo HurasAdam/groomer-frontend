@@ -24,7 +24,7 @@ interface IProps{
 
 const ServiceCard:React.FC<IProps> = ({manage,service,className}) => {
 
-console.log(service)
+
     return (
         <div
             className={`rounded-xl overflow-hidden 

@@ -1,8 +1,9 @@
 import React from "react";
 import { useMutation } from "react-query";
-import { login } from "../services/userApi";
+import { login, validateToken } from "../services/userApi";
 import LoginForm from "../forms/LoginForm";
 import { useAccountStore } from "../Store/store";
+import { useNavigate } from "react-router-dom";
 
 interface ILoginFormData {
   email: string;
@@ -11,15 +12,18 @@ interface ILoginFormData {
 
 const LoginPage: React.FC = () => {
   const setUserAccount = useAccountStore((state) => state.setAccount);
+  const navigate = useNavigate();
   const { mutate } = useMutation({
     mutationFn: ({ formData }: { formData: ILoginFormData }) => {
       return login({ formData });
     },
     onSuccess: (data) => {
-      localStorage.setItem("user",JSON.stringify(data));
+      // localStorage.setItem("user",JSON.stringify(data));
       setUserAccount(data);
+navigate("/");
 
     },
+    
   });
 
   const handleSave = ({ formData }: { formData: ILoginFormData }): void => {

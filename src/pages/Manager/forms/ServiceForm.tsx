@@ -32,10 +32,10 @@ const serviceEstimatedTimeOptions=[
 ]
 
 
-const ServiceForm:React.FC = ({handleSave,serviceDetails}) => {
+const ServiceForm:React.FC = ({handleSave,serviceDetails,isLoading}) => {
 
 
-const {register,handleSubmit,watch,formState:{errors},getValues}=useForm({
+const {register,handleSubmit,watch,formState:{errors,isDirty}}=useForm({
     defaultValues:{
         name:serviceDetails ? serviceDetails?.name : "",
         description: serviceDetails? serviceDetails?.description :"",
@@ -50,16 +50,12 @@ const {register,handleSubmit,watch,formState:{errors},getValues}=useForm({
     mode: "onChange",
 })
 
-const dane = getValues();
-console.log("dane")
-console.log(dane)
+
 const onSubmit = handleSubmit((data) => {
-    handleSave({ formData: data });
-    console.log(data)
+    handleSave({ formData:data,serviceId:serviceDetails?._id });
   });
 
-const pet = watch("estimatedTime")
-console.log(pet)
+
   return (
     <form 
     onSubmit={onSubmit}
@@ -119,8 +115,11 @@ console.log(pet)
                 className='hidden border rounded border-gray-300 w-full py-3  lg:py-1.5 px-2 xl:py-1 font-normal bg-slate-100' />
             </div>
             <button 
-type='submit'
-className='bg-blue-500 text-slate-50 font-semibold text-normal py-2 rounded'>Dodaj Usługę</button>
+            disabled={(isLoading && !serviceDetails) || (!isDirty && serviceDetails)}
+            type='submit'
+            className='bg-blue-500 disabled:opacity-50 text-slate-50 font-semibold text-normal py-2 rounded'>
+                    {isLoading ? "Zapisywanie" : (serviceDetails ? "Zapisz zmiany" : "Dodaj Usługę")}
+            </button>
 </div>
 
 <div className='flex flex-col gap-9 border p-5 rounded-md  border-gray-300 h-fit'>
