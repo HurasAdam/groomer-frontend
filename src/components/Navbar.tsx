@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { useAccountStore } from "../Store/store";
 import CONSTANTS from "../Constants";
 import { UserRole } from "../Constants/enums";
+import { logout } from "../services/userApi";
 
 interface NavbarProps {
   isLoading: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ isLoading }) => {
+const Navbar: React.FC<NavbarProps> = ({ isLoading,handleLogout }) => {
   const user = useAccountStore((state) => state.account);
 
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -115,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading }) => {
                         })}
 
                       <li className="py-1.5 px-5 hover:bg-blue-200  hover:font-semibold">
-                        <button onClick={() => console.log("LOGOUT")}>
+                        <button onClick={handleLogout}>
                           Wyloguj
                         </button>
                       </li>

@@ -21,6 +21,7 @@ export const addNewService= async({formData,token})=>{
 export const updateService = async({formData,serviceId,token})=>{
 
     const config = {
+        withCredentials:true,
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -32,6 +33,7 @@ export const updateService = async({formData,serviceId,token})=>{
 export const getServiceDetailed = async({id,token})=>{
 
     const config = {
+        withCredentials:true,
         headers: {
             Authorization: `Bearer ${token}`
         }

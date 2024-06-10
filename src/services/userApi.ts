@@ -81,3 +81,20 @@ const config = {
   const {data}= await axios.post("http://localhost:3000/api/auth/validateToken",{},config);
   return data;
 }
+
+
+export const validateAdminPermissions = async()=>{
+  const config = {
+    withCredentials:true,
+  }
+  const {data}= await axios.get("http://localhost:3000/api/admin/auth/adminValidate",config)
+  return data;
+}
+
+export const logout =async()=>{
+  const config = {
+    withCredentials:true
+  }
+  const {data}= await axios.post("http://localhost:3000/api/auth/logout",{},config);
+  return data;
+}

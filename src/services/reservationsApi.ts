@@ -34,6 +34,7 @@ export const cancelReservation = async({id})=>{
 export const getReservations =async({token}:{token:string})=>{
 
     const config = {
+        withCredentials:true,
         headers: {
             Authorization: `Bearer ${token}`
         }

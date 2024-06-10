@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import NavItem from '../pages/Manager/components/NavItem'
 import NavItemCollapse from '../pages/Manager/components/NavItemCollapse'
 import { MdCategory, MdDashboard, MdPeopleAlt } from 'react-icons/md'
@@ -8,6 +8,9 @@ import { LuScissorsSquare } from "react-icons/lu";
 import { RxDashboard } from "react-icons/rx";
 import { TiThList } from "react-icons/ti";
 import { FaRegHandshake } from "react-icons/fa";
+import toast from "react-hot-toast";
+import { useQuery } from 'react-query'
+import { validateAdminPermissions } from '../services/userApi'
 
 
 // const AdminNavbarLinks=[
@@ -101,9 +104,23 @@ const MENU_ITEMS = [
 const ManagerLayout:React.FC = () => {
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
     const [activeNavName, setActiveNavName] = useState("dashboard");
-   
+   const navigate = useNavigate();
 
+    const {data}=useQuery({
+      queryFn:()=>{
+        return validateAdminPermissions()
+      },
+      onSuccess:()=>{
+
+      },
+      onError:()=>{
+        navigate("/")
+        toast.error("Brak uprawnień")
+      },
+      retry:false
+    })
   
+   
 
   return (
     <div className='max-w-[1400px] mx-auto'>

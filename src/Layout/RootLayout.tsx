@@ -2,32 +2,48 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useQuery } from "react-query";
-import { validateToken } from "../services/userApi";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { logout, validateToken } from "../services/userApi";
 import { useAccountStore } from "../Store/store";
 
 
 const RootLayout:React.FC = () => {
   const user = useAccountStore((state) => state.account);
   const setUserAccount = useAccountStore((state) => state.setAccount);
+  const queryClient = useQueryClient();
 
 const {data,isLoading}=useQuery({
   queryFn:()=>{
     return validateToken();
   },
+  queryKey:["validateToken"],
   
   onSuccess:(userData)=>{
     setUserAccount(userData)
+  },
+  onError:()=>{
+    setUserAccount(undefined);
   },
   retry:false
 }
 )
 
-console.log(data);
+const {mutate}=useMutation({
+  mutationFn:()=>{
+    return logout()
+  },
+  onSuccess:()=>{
+    queryClient.invalidateQueries("validateToken");
+  }
+})
+
+const handleLogout=()=>{
+  return mutate()
+}
 
   return (
     <div className=" flex flex-col min-h-screen w-full ">
-      <Navbar isLoading={isLoading} />
+      <Navbar isLoading={isLoading} handleLogout={handleLogout} />
       <section className="flex-1 h-screen ">
         <Outlet />
       </section>
