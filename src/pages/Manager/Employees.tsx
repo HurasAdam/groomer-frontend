@@ -11,8 +11,9 @@ const Employees:React.FC = () => {
   const user = useAccountStore((state) => state.account);
 const {data:employees}=useQuery({
   queryFn:()=>{
-    return getDetailedEmployeesList({token:user?.token});
-  }
+    return getDetailedEmployeesList();
+  },
+  queryKey:["employees"]
 })
 
 const toggleEditEmployeePopup = ({employeeId})=>{
@@ -31,7 +32,7 @@ const tableHeaders=[
     <div className='p-8'>
       
 
-<DataGrid toggleEditEmployeePopup={toggleEditEmployeePopup}  data={employees} headers={tableHeaders}/>
+{employees&&<DataGrid toggleEditEmployeePopup={toggleEditEmployeePopup}  data={employees} headers={tableHeaders}/>}
 
 <Popup 
 setEmployeeEditPopup={setEmployeeEditPopup}

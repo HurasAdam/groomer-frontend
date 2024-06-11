@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import NavbarLinks from "../Constants/NavbarLinks";
+
 import { Link } from "react-router-dom";
-import { useAccountStore } from "../Store/store";
-import CONSTANTS from "../Constants";
-import { UserRole } from "../Constants/enums";
-import { logout } from "../services/userApi";
+
+
+import { UserRole } from "../../../Constants/enums";
+import CONSTANTS from "../../../Constants";
+import NavbarLinks from "../../../Constants/NavbarLinks";
+import { useAccountStore } from "../../../Store/store";
+
+
 
 interface NavbarProps {
   isLoading: boolean;
@@ -41,8 +45,9 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading,handleLogout }) => {
       <section className="flex justify-between  max-w-7xl mx-auto items-center h-full">
         <div className={`text-slate-900 ${isActive && "text-gray-700"}`}>
           <Link to="/">
-            <h1 className="text-2xl font-bold font-navbarFont ">
-              Groomer <span className="text-orange-700 text-2xl">.</span>
+            <h1 className="text-2xl font-bold font-heroSectionFont flex flex-col items-center ">
+              Admin panel 
+             <span className="text-lg text-slate-400">Groomer</span>
             </h1>
           </Link>
         </div>

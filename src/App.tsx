@@ -19,6 +19,7 @@ import Employees from "./pages/Manager/Employees";
 import Customers from "./pages/Manager/Customers";
 import NewService from "./pages/Manager/views/NewService";
 import EditService from "./pages/Manager/views/EditService";
+import EmployeeDetails from "./pages/Manager/views/EmployeeDetails";
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
             <Route path="/manage/services/service/:id" element={<EditService/>} />
             <Route path="/manage/services/new" element={<NewService/>} />
             <Route path="/manage/employees" element={<Employees/>} />
+            <Route path="/manage/employees/employee/:id" element={<EmployeeDetails/>} />
             <Route path="/manage/customers" element={<Customers/>} />
           </Route>
 

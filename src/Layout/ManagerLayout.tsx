@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Navbar from '../components/Navbar'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import NavItem from '../pages/Manager/components/NavItem'
 import NavItemCollapse from '../pages/Manager/components/NavItemCollapse'
@@ -9,8 +8,10 @@ import { RxDashboard } from "react-icons/rx";
 import { TiThList } from "react-icons/ti";
 import { FaRegHandshake } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { useQuery } from 'react-query'
-import { validateAdminPermissions } from '../services/userApi'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { logout, validateAdminPermissions } from '../services/userApi'
+import Navbar from '../pages/Manager/components/Navbar'
+import { useAccountStore } from '../Store/store'
 
 
 // const AdminNavbarLinks=[
@@ -79,7 +80,7 @@ const MENU_ITEMS = [
     {
       title: "Pracownicy",
       content: [
-        { title: "Zarządzaj Pracownikami", link: "/admin/categories/manage" },
+        { title: "Zarządzaj Pracownikami", link: "/manage/employees" },
         { title: "Dodaj Pracownika", link: "/admin/categories/new" },
      
       ],
@@ -92,7 +93,7 @@ const MENU_ITEMS = [
   
     {
       title: "Klienci",
-      link: "/admin/users",
+      link: "/manage/customers",
       icon: <MdPeopleAlt className="text-xl" />,
       name: "customers",
       type: "link",
@@ -102,16 +103,18 @@ const MENU_ITEMS = [
 
 
 const ManagerLayout:React.FC = () => {
+  const queryClient = useQueryClient();
     const [isMenuActive, setIsMenuActive] = useState<boolean>(false);
     const [activeNavName, setActiveNavName] = useState("dashboard");
+    const setUserAccount = useAccountStore((state) => state.setAccount);
    const navigate = useNavigate();
 
-    const {data}=useQuery({
+    const {data,isLoading}=useQuery({
       queryFn:()=>{
         return validateAdminPermissions()
       },
-      onSuccess:()=>{
-
+      onSuccess:(userData)=>{
+          setUserAccount(userData)
       },
       onError:()=>{
         navigate("/")
@@ -120,11 +123,26 @@ const ManagerLayout:React.FC = () => {
       retry:false
     })
   
+
+
+    const {mutate}=useMutation({
+      mutationFn:()=>{
+        return logout()
+      },
+      onSuccess:()=>{
+        queryClient.invalidateQueries("validateToken");
+      }
+    })
+    
+    const handleLogout=()=>{
+      return mutate()
+    }
+
    
 
   return (
     <div className='max-w-[1400px] mx-auto'>
-        <Navbar/>
+ <Navbar handleLogout={handleLogout} isLoading={isLoading}/>
         <div className='flex py-10'>
             <div className='min-w-[260px] border-r flex flex-col   '>
                 <ul>

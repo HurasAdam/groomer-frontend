@@ -15,14 +15,18 @@ export interface IFormData{
     role:string;
   }
 
-  export interface IService{
-    _id:string;
-    name:string;
-    price:number;
-    description:string;
-    estimatedTime:number;
-    image:string;
-}
+  interface IService {
+    _id: string;
+    name: string;
+    description: string;
+    created: string;
+    anima: string;
+    estimatedTime: number;
+    image: string;
+    reservationCount: number;
+    isPromotion: boolean;
+    price: number;
+  }
 
 export interface IAsignedEmployee{
     _id:string;

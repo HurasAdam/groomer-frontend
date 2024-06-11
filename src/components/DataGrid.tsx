@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CONSTANTS from "../Constants";
 
 
@@ -14,8 +14,11 @@ import CONSTANTS from "../Constants";
 // }
 
 const DataGrid:React.FC= ({data,headers,toggleEditEmployeePopup}) => {
+  const {pathname}=useLocation()
   return (
     
+
+
 <div className="px-4  -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
           <div className="inline-block min-w-full overflow-hidden rounded-lg shadow">
             <table className="min-w-full leading-normal">
@@ -39,8 +42,7 @@ const DataGrid:React.FC= ({data,headers,toggleEditEmployeePopup}) => {
                 </tr>
               </thead>
               <tbody>
-                { 
-                 data&& data.map((item) => {
+                { data?.map((item) => {
                     return (
                       <tr key={item.id}>
                         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
@@ -75,12 +77,14 @@ const DataGrid:React.FC= ({data,headers,toggleEditEmployeePopup}) => {
                           </div>
                         </td>
                         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200 space-x-5">
+                          <Link to={`${pathname}/employee/${item?._id}`}>
                           <button
-                           onClick={()=>toggleEditEmployeePopup({employeeId:item?._id})}
+                        
                             className="text-green-600 hover:text-green-900"
                           >
                             View
                           </button>
+                          </Link>
                         </td>
                       </tr>
                     );

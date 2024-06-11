@@ -9,7 +9,7 @@ const Customers:React.FC = () => {
     const [customerEditPopup,setCustomerEditPopup]=useState(false);
 const {data:customers}=useQuery({
     queryFn:()=>{
-        return getDetailedCustomersList({token:user?.token});
+        return getDetailedCustomersList();
     },
     queryKey:["customers"]
 })

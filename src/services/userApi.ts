@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IEmployee, IService } from "../types";
 
 export const register = async ({ formData }) => {
   //   console.log("LAST ");
@@ -23,32 +24,33 @@ export const login = async ({ formData }) => {
   return data;
 };
 
-export const getAllServices = async()=>{
+export const getAllServices = async():Promise<IService[]>=>{
   try{
 const {data}= await axios.get("http://localhost:3000/api/services/")
 return data;
   }catch(error){
     console.log(`Error:${error}`)
+    return [];
   }
 }
 
-export const getAllEmployees = async()=>{
+export const getAllEmployees = async():Promise<IEmployee[]>=>{
   try{
     const {data}= await axios.get("http://localhost:3000/api/users/employees");
     return data;
   }catch(error){
     console.log(`ERROR:${error}`)
+    return []
   }
 }
 
 
 
-export const getDetailedEmployeesList = async({token}:{token:string})=>{
+export const getDetailedEmployeesList = async()=>{
   try{
     const config = {
-      headers: {
-          Authorization: `Bearer ${token}`
-      }
+withCredentials:true
+
   }
 
     const {data}= await axios.get("http://localhost:3000/api/admin/employees",config);
@@ -58,12 +60,10 @@ export const getDetailedEmployeesList = async({token}:{token:string})=>{
   }
 }
 
-export const getDetailedCustomersList = async({token}:{token:string})=>{
+export const getDetailedCustomersList = async()=>{
   try{
     const config = {
-      headers: {
-          Authorization: `Bearer ${token}`
-      }
+   withCredentials:true
   }
 
     const {data}= await axios.get("http://localhost:3000/api/admin/customers",config);
