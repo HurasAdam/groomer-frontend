@@ -13,11 +13,9 @@ export const getMyReservations = async({token})=>{
     return data;
 }
 
-export const createReservation = async({formData,token}:{formData:types.IFormData,token:string | undefined})=>{
+export const createReservation = async({formData}:{formData:types.IFormData})=>{
     const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+        withCredentials:true,
     }
 
     const {data}= await axios.post('http://localhost:3000/api/reservations/create',formData,config);
@@ -31,15 +29,13 @@ export const cancelReservation = async({id})=>{
 }
 
 
-export const getReservations =async({token}:{token:string})=>{
-
+export const getReservations =async({searchFilter}:{searchFilter:string})=>{
+console.log(searchFilter)
     const config = {
         withCredentials:true,
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
+
     }
 
-    const {data}= await axios.get("http://localhost:3000/api/admin/reservations",config);
+    const {data}= await axios.get(`http://localhost:3000/api/admin/reservations?${searchFilter}=${true}`,config);
     return data;
 }
