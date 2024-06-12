@@ -11,9 +11,9 @@ interface ReservationTypeOption {
   }
 
 const reservationTypeOptions:ReservationTypeOption[]=[
-    {label:"Pending",value:"pending"},
-    {label:"Completed",value:"completed"},
-    {label:"Canceled",value:"canceled"},
+    {label:"Oczekujące",value:"pending"},
+    {label:"Zrealizowane",value:"completed"},
+    {label:"Anulowane",value:"canceled"},
 ]
 
 const Reservations:React.FC = () => {
@@ -31,7 +31,7 @@ const {data:reservations}=useQuery({
 })
 
 const {mutate}=useMutation({
-    mutationFn:({id})=>{
+    mutationFn:({id}:{id:string})=>{
         return cancelReservation({id})
     },
     onSuccess:()=>{
@@ -40,14 +40,16 @@ const {mutate}=useMutation({
 })
 
 
-const cancelReservationHandler = ({id})=>{
+const cancelReservationHandler = ({id}:{id:string})=>{
     mutate({id})
 }
 
 
   return (
     <div className='px-8 py-4'>
-<select name="" id="" onChange={(e)=>setSearchFilter(e.target.value)}>
+<select 
+className='mb-5'
+onChange={(e)=>setSearchFilter(e.target.value)}>
 {reservationTypeOptions.map(({label,value},index)=>{
     return(
         < option key={index} value={value}>{label}</option>

@@ -24,9 +24,9 @@ export const login = async ({ formData }) => {
   return data;
 };
 
-export const getAllServices = async():Promise<IService[]>=>{
+export const getAllServices = async(filter="",animalFilter=""):Promise<IService[]>=>{
   try{
-const {data}= await axios.get("http://localhost:3000/api/services/")
+const {data}= await axios.get(`http://localhost:3000/api/services/?filter=${filter}&animal=${animalFilter}`)
 return data;
   }catch(error){
     console.log(`Error:${error}`)
