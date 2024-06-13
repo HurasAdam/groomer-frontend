@@ -2,7 +2,10 @@ import React from 'react'
 import { GoClockFill } from 'react-icons/go'
 import { FaCoins } from "react-icons/fa";
 import images from '../Constants/imaegs'
+import { GiSittingDog } from "react-icons/gi";
+import { FaCat } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
+import { AnimalType } from '../Constants/enums';
 
 interface IService{
     _id:string;
@@ -11,7 +14,7 @@ price:number;
 created:string;
 estimatedTime:number;
 description:string;
-animal:string;
+animal:AnimalType;
 image:string;
 reservationCount:number;
 }
@@ -45,12 +48,17 @@ const ServiceCard:React.FC<IProps> = ({manage,service,className}) => {
                         {service.name}
                     </h2>
                 </Link>
+             
                 <p className='text-dark-light mt-3 text-sm md:text-base text-gray-700'>
                     {service.description}
                 </p>
 <div className='flex justify-between'>
 
 <div className='flex flex-col flex-nowrap  mt-6'>
+<div className='flex items-center gap-x-2 md:gap-x-2.5'>
+{service.animal=== AnimalType.PIES  ? <GiSittingDog className='text-gray-600 w-5 h-5'/>:<FaCat className='text-gray-600'/>}
+
+</div>
 
 <div className='flex items-center gap-x-2 md:gap-x-2.5'>
 <GoClockFill className='text-gray-600'/>

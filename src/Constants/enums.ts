@@ -4,3 +4,7 @@ export enum UserRole {
     CLIENT = "client",
   }
 
+export enum AnimalType{
+  PIES="pies",
+  KOT="kot"
+}
