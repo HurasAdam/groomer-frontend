@@ -73,7 +73,7 @@ const ServiceCard:React.FC<IProps> = ({manage,service,className}) => {
 
 
 </div>
-{manage ? <Link to={`/manage/services/service/${service._id}`}><button className='bg-teal-500 h-fit my-auto  px-6 py-2 rounded-md text-white font-semibold hover:bg-teal-400 transition-all'>Edytuj</button></Link>  : <Link to={`services/service/${service?._id}`}>
+{manage ? <Link to={`/manage/services/service/${service._id}`}><button className='bg-teal-500 h-fit my-auto  px-6 py-2 rounded-md text-white font-semibold hover:bg-teal-400 transition-all'>Edytuj</button></Link>  : <Link to={`/service/${service?._id}`}>
 <button 
 className='bg-blue-500 h-fit my-auto  px-6 py-2 rounded-md text-white font-semibold hover:bg-blue-400 transition-all'
 >

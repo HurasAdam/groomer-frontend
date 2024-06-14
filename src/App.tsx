@@ -20,6 +20,8 @@ import Customers from "./pages/Manager/Customers";
 import NewService from "./pages/Manager/views/NewService";
 import EditService from "./pages/Manager/views/EditService";
 import EmployeeDetails from "./pages/Manager/views/EmployeeDetails";
+import UserInfo from "./pages/Manager/views/UserInfo";
+import UserWorkSchedule from "./pages/Manager/views/UserWorkSchedule";
 
 const App = () => {
   return (
@@ -33,7 +35,7 @@ const App = () => {
             <Route path="/our-story" element={<OurStoryPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/services/service/:id" element={<ServiceDetails />} />
+            <Route path="/service/:id" element={<ServiceDetails />} />
             <Route path="/my-reservations" element={<MyReservations/>} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/404" element={<ErrorPage />} />
@@ -49,7 +51,10 @@ const App = () => {
             <Route path="/manage/services/service/:id" element={<EditService/>} />
             <Route path="/manage/services/new" element={<NewService/>} />
             <Route path="/manage/employees" element={<Employees/>} />
-            <Route path="/manage/employees/employee/:id" element={<EmployeeDetails/>} />
+            <Route path="/manage/employees/employee/:id" element={<EmployeeDetails/>} >
+<Route index path="/manage/employees/employee/:id/personal" element={<UserInfo/>}/>
+<Route index path="/manage/employees/employee/:id/workSchedule" element={<UserWorkSchedule/>}/>
+            </Route>
             <Route path="/manage/customers" element={<Customers/>} />
           </Route>
 
