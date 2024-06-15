@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface ILoginFormProps {
   handleSave: (formData: { email: string; password: string }) => void;
 }
 
-const LoginForm: React.FC<ILoginFormProps> = ({ handleSave }) => {
+const LoginForm: React.FC<ILoginFormProps> = ({ handleSave,isEmployee,setIsEmployee }) => {
+
   const {
     register,
     handleSubmit,
@@ -50,6 +51,15 @@ const LoginForm: React.FC<ILoginFormProps> = ({ handleSave }) => {
             {...register("password", { required: "password is required" })}
             className="py-3 px-3 bg-slate-100 rounded mt-1"
           />
+        </div>
+        <div className="flex items-center gap-1">
+        <label className="text-slate-500 text-xs" htmlFor="employee">
+            pracownik
+          </label>
+          <input 
+       onChange={() => setIsEmployee((prev) => !prev)}
+          id="employee"
+          type="checkbox" />
         </div>
         <button
           type="submit"

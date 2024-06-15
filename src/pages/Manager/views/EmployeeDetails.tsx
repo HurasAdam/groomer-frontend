@@ -4,7 +4,7 @@ import { Link, Outlet, useLocation, useParams } from 'react-router-dom'
 import { getEmployeeDetails } from '../../../services/userApi';
 
 const links = [
-  {link:"personal",label:"Informacje ogólne"},
+  {link:"",label:"Informacje ogólne"},
   {link:"workSchedule",label:"Grafik"},
 ]
 

@@ -22,6 +22,7 @@ import EditService from "./pages/Manager/views/EditService";
 import EmployeeDetails from "./pages/Manager/views/EmployeeDetails";
 import UserInfo from "./pages/Manager/views/UserInfo";
 import UserWorkSchedule from "./pages/Manager/views/UserWorkSchedule";
+import NewEmployee from "./pages/Manager/views/NewEmployee";
 
 const App = () => {
   return (
@@ -50,9 +51,10 @@ const App = () => {
             <Route path="/manage/services" element={<Services/>} />
             <Route path="/manage/services/service/:id" element={<EditService/>} />
             <Route path="/manage/services/new" element={<NewService/>} />
+            <Route path="/manage/employee/new" element={<NewEmployee/>}/>
             <Route path="/manage/employees" element={<Employees/>} />
             <Route path="/manage/employees/employee/:id" element={<EmployeeDetails/>} >
-<Route index path="/manage/employees/employee/:id/personal" element={<UserInfo/>}/>
+<Route index path="/manage/employees/employee/:id" element={<UserInfo/>}/>
 <Route index path="/manage/employees/employee/:id/workSchedule" element={<UserWorkSchedule/>}/>
             </Route>
             <Route path="/manage/customers" element={<Customers/>} />

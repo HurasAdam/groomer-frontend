@@ -81,7 +81,7 @@ const MENU_ITEMS = [
       title: "Pracownicy",
       content: [
         { title: "Zarządzaj Pracownikami", link: "/manage/employees" },
-        { title: "Dodaj Pracownika", link: "/admin/categories/new" },
+        { title: "Dodaj Pracownika", link: "/manage/employee/new" },
      
       ],
       icon: <FaRegHandshake className="text-xl" />,

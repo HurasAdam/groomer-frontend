@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMutation } from "react-query";
-import { login, validateToken } from "../services/userApi";
+import { login, loginEmployee, validateToken } from "../services/userApi";
 import LoginForm from "../forms/LoginForm";
 import { useAccountStore } from "../Store/store";
 import { useNavigate } from "react-router-dom";
@@ -11,11 +11,14 @@ interface ILoginFormData {
 }
 
 const LoginPage: React.FC = () => {
+  const [isEmployee,setIsEmployee]=useState(false);
+
+  console.log(isEmployee)
   const setUserAccount = useAccountStore((state) => state.setAccount);
   const navigate = useNavigate();
   const { mutate } = useMutation({
     mutationFn: ({ formData }: { formData: ILoginFormData }) => {
-      return login({ formData });
+      return isEmployee? loginEmployee({formData}) :login({ formData }) 
     },
     onSuccess: (data) => {
       // localStorage.setItem("user",JSON.stringify(data));
@@ -40,7 +43,10 @@ navigate("/");
           please enter your details
         </span>
 
-        <LoginForm handleSave={handleSave} />
+        <LoginForm 
+        isEmployee={isEmployee}
+        setIsEmployee={setIsEmployee}
+        handleSave={handleSave} />
       </div>
     </section>
   );

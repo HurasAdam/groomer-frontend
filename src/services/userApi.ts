@@ -106,3 +106,21 @@ const config={
 const {data}= await axios.get(`http://localhost:3000/api/admin/employee/${id}`,config);
 return data;
 }
+
+export const registerEmployee= async({formData})=>{
+  const config={
+    withCredentials:true
+  }
+  const {data}= await axios.post(`http://localhost:3000/api/admin/register-employee`,formData,config);
+  return data;
+}
+
+
+export const loginEmployee= async({formData})=>{
+
+  const config={
+    withCredentials:true
+  }
+  const {data}= await axios.post(`http://localhost:3000/api/employee-auth/login`,formData,config);
+  return data;
+}

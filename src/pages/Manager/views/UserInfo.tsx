@@ -1,8 +1,11 @@
 import React from 'react'
+import EmployeeForm from '../forms/EmployeeForm'
 
-const UserInfo = () => {
+const UserInfo:React.FC = () => {
   return (
-    <div>UserInfo</div>
+    <div className='px-10'>
+      <EmployeeForm/>
+    </div>
   )
 }
 
