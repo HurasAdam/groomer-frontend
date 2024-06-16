@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -11,6 +11,7 @@ const RootLayout:React.FC = () => {
   const user = useAccountStore((state) => state.account);
   const setUserAccount = useAccountStore((state) => state.setAccount);
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
 const {data,isLoading}=useQuery({
   queryFn:()=>{
@@ -27,6 +28,12 @@ const {data,isLoading}=useQuery({
   retry:false
 }
 )
+
+if(user && user?.mustChangePassword){
+  navigate("/onboard-settings")
+}
+
+
 
 const {mutate}=useMutation({
   mutationFn:()=>{

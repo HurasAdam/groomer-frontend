@@ -48,7 +48,7 @@ const DataGrid:React.FC= ({data,headers,toggleEditEmployeePopup}) => {
                         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                           <div className="flex items-center">
                             <div className="ml-3 flex items-center">
-                            <img src={CONSTANTS.IMAGES.DogBathImage} className="h-12 w-12 object-cover rounded-full" alt="" />
+                            <img src={item?.avatar} className="h-12 w-12 object-cover rounded-full" alt="" />
                               <p className="text-gray-900 whitespace-no-wrap">
                                 {item?.username}
                               </p>
@@ -59,7 +59,7 @@ const DataGrid:React.FC= ({data,headers,toggleEditEmployeePopup}) => {
                         <td className="px-5 py-5 text-sm bg-white border-b border-gray-200">
                           <div className="flex flex-col gap-x-1.5 gap-y-1.5 flex-wrap">
                             <p className="text-gray-900 whitespace-no-wrap text-xs">
-                              {item?.role}
+                              {item?.experienceLevel}
                             </p>
                           </div>
                         </td>

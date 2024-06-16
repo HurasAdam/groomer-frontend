@@ -15,6 +15,7 @@ import DogBathImage from "../assets/images/dogBathImage.jpg";
 import DogHairdcutImage from "../assets/images/dogHaircutImage.jpg";
 import DogToothImage from "../assets/images/dogToothImage.jpg";
 import DogNailclipImage from "../assets/images/dogNailclipImage.jpg";
+import OnboardingImage from "../assets/images/onboardingImage.png";
 
 const images = {
 
@@ -32,6 +33,7 @@ const images = {
   DogHairdcutImage,
   DogToothImage,
   DogNailclipImage,
+  OnboardingImage,
   IntroductionImages:[
     IntroDogImage,IntroRabbitImage1,IntroCatImage
   ]

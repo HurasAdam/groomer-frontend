@@ -16,6 +16,9 @@ type IUser = {
     token:string;
     username:string;
     role:UserRole;
+    mustChangePassword:boolean;
+    experienceLevel:string;
+    isActive:boolean;
 }
 
 const checkUserPersist = localStorage.getItem("user")

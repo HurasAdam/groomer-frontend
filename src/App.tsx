@@ -23,12 +23,20 @@ import EmployeeDetails from "./pages/Manager/views/EmployeeDetails";
 import UserInfo from "./pages/Manager/views/UserInfo";
 import UserWorkSchedule from "./pages/Manager/views/UserWorkSchedule";
 import NewEmployee from "./pages/Manager/views/NewEmployee";
+import AccountOnboardingLayout from "./Layout/AccountOnboardingLayout";
+import OnboardingPage from "./pages/Onboarding/OnboardingPage";
 
 const App = () => {
   return (
     <main className=" h-screen w-full">
       <Router>
         <Routes>
+
+        <Route element={<AccountOnboardingLayout/>}>
+<Route index path="/onboard-settings" element={<OnboardingPage/>}/>
+          </Route>
+
+
           <Route element={<RootLayout />}>
             <Route path="/*" element={<Home />} />
             <Route path="/services" element={<ServicesPage />} />
@@ -41,9 +49,6 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/404" element={<ErrorPage />} />
           </Route>
-
-
-
 
           <Route element={<ManagerLayout />}>
             <Route path="/manage" element={<Dashboard/>} />
@@ -59,6 +64,8 @@ const App = () => {
             </Route>
             <Route path="/manage/customers" element={<Customers/>} />
           </Route>
+
+
 
         </Routes>
       </Router>
