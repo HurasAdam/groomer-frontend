@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-const OnboardingForm:React.FC = ({onSave}) => {
+const OnboardingForm:React.FC = ({onSave,errorMessage}) => {
 
 const {register,formState:{errors, isValid},handleSubmit,watch}=useForm({
     defaultValues:{
@@ -46,16 +46,23 @@ onSave({formData:data})
         </ul>
     </div>
                 <div className='flex flex-col'>
-                    <label htmlFor="">Wprowadź obecne hasło</label>
+                    <label 
+                    className='text-slate-700 text-sm mb-1'
+                    htmlFor="password">Wprowadź obecne hasło</label>
                     <input 
+                    id='password'
  {...register("password",{required:"Obecne hasło jest wymagane"})}
                     className='bg-slate-200 py-2 rounded '
                     type="password" />
-                           {errors.password && (<span className='text-rose-600 text-xs'>{errors.password.message}</span>)}
+                           {errors.password ? (<span className='text-rose-600 text-xs'>{errors.password.message}</span>) : errorMessage? <span className='text-rose-600 text-xs'>{errorMessage}</span>:""}
+                          
                 </div>
                 <div className='flex flex-col'>
-                    <label htmlFor="">Wprowadź nowe hasło</label>
+                    <label 
+                      className='text-slate-700 text-sm mb-1'
+                    htmlFor="newPassword">Wprowadź nowe hasło</label>
                     <input 
+                    id='newPassword'
                     {...register('newPassword', {
                         validate: (val) =>
                           validatePassword(val) ||
@@ -66,8 +73,11 @@ onSave({formData:data})
                        {errors.newPassword && (<span className='text-rose-600 text-xs'>{errors.newPassword.message}</span>)}
                 </div>
                 <div className='flex flex-col'>
-                    <label htmlFor="">Potwierdź nowe hasło</label>
+                    <label 
+                      className='text-slate-700 text-sm mb-1'
+                    htmlFor="confirmNewPassword">Potwierdź nowe hasło</label>
                     <input 
+                    id='confirmNewPassword'
            {...register("confirmNewPassword",{
             validate:(value)=>{
                 const newPassword = watch("newPassword")
@@ -81,7 +91,7 @@ onSave({formData:data})
                     type="password" />
                          {errors.confirmNewPassword && (<span className='text-rose-600 text-xs'>{errors.confirmNewPassword.message}</span>)}
                 </div>
-                <button className='bg-blue-500 text-slate-100 mt-8 font-semibold pt-3 rounded py-1.5'>Potwierdź</button>
+                <button className='bg-blue-500 text-white mt-8 hover:bg-blue-400 transition-all font-semibold pt-3 rounded py-1.5'>Potwierdź</button>
             </form>
   )
 }
