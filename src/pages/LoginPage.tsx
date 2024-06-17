@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { login, loginEmployee, validateToken } from "../services/userApi";
 import LoginForm from "../forms/LoginForm";
 import { useAccountStore } from "../Store/store";
@@ -13,7 +13,7 @@ interface ILoginFormData {
 const LoginPage: React.FC = () => {
   const [isEmployee,setIsEmployee]=useState(false);
 
-  console.log(isEmployee)
+const queryClient = useQueryClient();
   const setUserAccount = useAccountStore((state) => state.setAccount);
   const navigate = useNavigate();
   const { mutate } = useMutation({
@@ -23,6 +23,7 @@ const LoginPage: React.FC = () => {
     onSuccess: (data) => {
       // localStorage.setItem("user",JSON.stringify(data));
       setUserAccount(data);
+      queryClient.invalidateQueries("validateToken")
 navigate("/");
 
     },
