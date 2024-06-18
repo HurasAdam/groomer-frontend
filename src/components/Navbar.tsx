@@ -5,6 +5,7 @@ import { useAccountStore } from "../Store/store";
 import CONSTANTS from "../Constants";
 import { UserRole } from "../Constants/enums";
 import { logout } from "../services/userApi";
+import { RiVipCrownFill } from "react-icons/ri";
 
 interface NavbarProps {
   isLoading: boolean;
@@ -82,10 +83,10 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading,handleLogout }) => {
             <div className="relative group  ">
               <div className="flex flex-col items-center">
                 <button
-                  className="bg-sky-100 w-9 font-semibold text-gray-500 h-9 rounded-full"
+                  className={` bg-sky-100 w-9 font-semibold text-gray-500 h-9 rounded-full ${user && user?.role ===UserRole.ADMIN &&"bg-orange-200"} ${user && user?.role ===UserRole.EMPLOYEE &&"bg-violet-300"}`}
                   onClick={toggleDropdownHandler}
                 >
-                  {user?.username.charAt(0)}
+                  {user?.role ===UserRole.ADMIN ?  <RiVipCrownFill className="mx-auto h-6 w-6 text-amber-500"/>  :user?.username.charAt(0)}
                 </button>
                 <div
                   className={`lg:hidden  transition-all duration-500 pt-4 lg:absolute lg:bottom-0  lg:transform lg:translate-y-full lg:group-hover:block w-[180px]  `}
@@ -106,6 +107,18 @@ const Navbar: React.FC<NavbarProps> = ({ isLoading,handleLogout }) => {
 
                       {user?.role === UserRole.ADMIN &&
                         CONSTANTS.DROPDOWNLINKS.admin.map(({ link, label }) => {
+                          return (
+                            <li
+                              className="py-1.5 px-5 hover:bg-blue-200 hover:font-semibold"
+                              key={label}
+                            >
+                              <Link to={link}>{label}</Link>
+                            </li>
+                          );
+                        })}
+
+{user?.role === UserRole.EMPLOYEE &&
+                        CONSTANTS.DROPDOWNLINKS.employee.map(({ link, label }) => {
                           return (
                             <li
                               className="py-1.5 px-5 hover:bg-blue-200 hover:font-semibold"

@@ -25,6 +25,8 @@ import UserWorkSchedule from "./pages/Manager/views/UserWorkSchedule";
 import NewEmployee from "./pages/Manager/views/NewEmployee";
 import AccountOnboardingLayout from "./Layout/AccountOnboardingLayout";
 import OnboardingPage from "./pages/Onboarding/OnboardingPage";
+import EmployeeLayout from "./Layout/EmployeeLayout";
+import EmployeeDashboard from "./pages/Employee/views/EmployeeDashboard";
 
 const App = () => {
   return (
@@ -65,6 +67,11 @@ const App = () => {
             <Route path="/manage/customers" element={<Customers/>} />
           </Route>
 
+<Route element={<EmployeeLayout/>}>
+<Route path="/employee-panel" element={<EmployeeDashboard/>}/>
+
+
+</Route>
 
 
         </Routes>

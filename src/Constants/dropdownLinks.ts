@@ -26,6 +26,20 @@ const DROPDOWNLINKS={
       label:"Ustawienia",
       link:"/settings"
     }
+  ],
+  employee:[
+    {
+      label:"Panel Pracownika",
+      link:"/employee-panel"
+    },
+    {
+      label:"Profil",
+      link:"/profile"
+    },
+    {
+      label:"Ustawienia",
+      link:"/settings"
+    }
   ]
 }
 
