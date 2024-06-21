@@ -37,11 +37,11 @@ const EmployeeForm:React.FC = ({handleSave,serviceDetails,isLoading}) => {
 
 const {register,handleSubmit,watch,formState:{errors,isDirty},setValue}=useForm({
     defaultValues:{
-        username: "",
+        username: serviceDetails? serviceDetails?.username :"",
         surname:"",
-        email:"",
+        email: serviceDetails ? serviceDetails?.email :"",
         bio:"",
-        avatar:"",
+        avatar:serviceDetails? serviceDetails?.avatar:"",
         experienceLevel:""
   
     },
@@ -62,7 +62,8 @@ formData.append("avatar",avatar);
     handleSave({ formData:formData,serviceId:serviceDetails?._id });
   });
 
-
+console.log("USER TO")
+console.log(serviceDetails)
   return (
     <form 
     onSubmit={onSubmit}
@@ -140,7 +141,7 @@ formData.append("avatar",avatar);
 
 <div className='grid-row-5 gap-3  md:gap-3 lg:grid '>
 
-<img src={selectedAvatarImage&& URL.createObjectURL(selectedAvatarImage)} alt="avatar" className='max-h-[350px] max-w-auto mx-auto' />
+{serviceDetails?.avatar ? <img src={watch("avatar")}/> : <img src={selectedAvatarImage&& URL.createObjectURL(selectedAvatarImage)} alt="avatar" className='max-h-[350px] max-w-auto mx-auto' />}
 <button 
 className='bg-teal-600 text-slate-200 font-semibold rounded w-fit py-0.5 px-28 mx-auto'
 onClick={()=>setValue("avatar","")}>Usuń</button>

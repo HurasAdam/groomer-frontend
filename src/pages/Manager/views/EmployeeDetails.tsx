@@ -14,15 +14,6 @@ const EmployeeDetails:React.FC = () => {
   const {id}=useParams();
   const {pathname}=useLocation();
 
-  console.log(id)
-
-  const {data}=useQuery({
-    queryFn:()=>{
-      return getEmployeeDetails(id)
-    },
-    queryKey:["employee",id]
-  })
-
   return (
     <div>
  <ul className='flex justify-center gap-10'>
@@ -31,7 +22,7 @@ const EmployeeDetails:React.FC = () => {
 
   return(
     <Link to={`/manage/employees/employee/${id}/${link}`}>
-    <li className={isActive ? "border":""}>{label}</li>
+    <li className={isActive ? "font-semibold":""}>{label}</li>
     </Link>
   )
 })}
