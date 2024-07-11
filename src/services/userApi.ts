@@ -132,3 +132,11 @@ export const changeEmployeePassword = async({formData})=>{
   const {data}= await axios.put("http://localhost:3000/api/employee-auth/change-password",formData,config)
 return data;
 }
+
+export const createDaySchedule = async()=>{
+  const config = {
+    withCredentials:true
+  }
+  const {data}= await axios.post("http://localhost:3000/api/admin/newSchedule",{},config)
+return data;
+}
